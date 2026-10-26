@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Saints HS | Tech & Venue Booking</title>
+  <meta name="description" content="Book tech equipment and venues at All Saints High School." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="crest" aria-hidden="true">AS</div>
+    <div>
+      <h1 class="site-title">All Saints High School</h1>
+      <p class="site-subtitle">Tech Equipment &amp; Venue Booking</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card" aria-labelledby="form-heading">
+
+      <div class="card-header">
+        <h2 id="form-heading">Book Your Event</h2>
+        <p>Fill out the form below and you'll receive a confirmation email with your request details.</p>
+      </div>
+
+      <!-- novalidate: validation is handled in script.js for consistent styling -->
+      <form id="bookingForm" novalidate>
+
+        <!-- ========== SECTION: Contact ========== -->
+        <fieldset class="form-section">
+          <legend>Your Details</legend>
+
+          <div class="grid-2">
+            <!-- Full Name -->
+            <div class="field">
+              <label for="fullName">Full Name <span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" placeholder="e.g. Jane Smith" autocomplete="name" required />
+              <small class="error-msg" aria-live="polite"></small>
+            </div>
+
+            <!-- Email (needed to send the user their confirmation) -->
+            <div class="field">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="you@ocsb.ca" autocomplete="email" required />
+              <small class="error-msg" aria-live="polite"></small>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ========== SECTION: Event ========== -->
+        <fieldset class="form-section">
+          <legend>Event Information</legend>
+
+          <!-- Event Name -->
+          <div class="field">
+            <label for="eventName">Event Name <span class="req">*</span></label>
+            <input type="text" id="eventName" name="eventName" placeholder="e.g. Grade 9 Welcome Assembly" required />
+            <small class="error-msg" aria-live="polite"></small>
+          </div>
+
+          <div class="grid-3">
+            <!-- Event Date -->
+            <div class="field">
+              <label for="eventDate">Event Date <span class="req">*</span></label>
+              <input type="date" id="eventDate" name="eventDate" required />
+              <small class="error-msg" aria-live="polite"></small>
+            </div>
+
+            <!-- Start Time -->
+            <div class="field">
+              <label for="startTime">Start Time <span class="req">*</span></label>
+              <input type="time" id="startTime" name="startTime" required />
+              <small class="error-msg" aria-live="polite"></small>
+            </div>
+
+            <!-- End Time -->
+            <div class="field">
+              <label for="endTime">End Time <span class="req">*</span></label>
+              <input type="time" id="endTime" name="endTime" required />
+              <small class="error-msg" aria-live="polite"></small>
+            </div>
+          </div>
+
+          <!-- Location: to add a venue, add another <option> -->
+          <div class="field">
+            <label for="location">Location <span class="req">*</span></label>
+            <select id="location" name="location" required>
+              <option value="" disabled selected>Select a location…</option>
+              <option value="Wood Floor Gym">Wood Floor Gym</option>
+              <option value="Caf Gym">Caf Gym</option>
+              <option value="Atrium">Atrium</option>
+              <option value="LC">LC</option>
+              <option value="Other">Other</option>
+            </select>
+            <small class="error-msg" aria-live="polite"></small>
+          </div>
+
+          <!-- Shown only when Location = "Other" (toggled in script.js) -->
+          <div class="field reveal" id="otherLocationWrap" hidden>
+            <label for="otherLocation">Please specify location <span class="req">*</span></label>
+            <input type="text" id="otherLocation" name="otherLocation" placeholder="e.g. Room 214, Library, Front Field" />
+            <small class="error-msg" aria-live="polite"></small>
+          </div>
+        </fieldset>
+
+        <!-- ========== SECTION: Equipment & Setup ========== -->
+        <fieldset class="form-section">
+          <legend>Equipment &amp; Setup</legend>
+
+          <!-- Tech Equipment: to add an item, copy one <label class="chip"> block -->
+          <div class="field">
+            <span class="label">Tech Equipment Needed</span>
+            <div class="chip-group" role="group" aria-label="Tech Equipment Needed">
+              <label class="chip">
+                <input type="checkbox" name="equipment" value="Microphone" />
+                <span>🎤 Microphone</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" name="equipment" value="Speaker" />
+                <span>🔊 Speaker</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" name="equipment" value="Projector" />
+                <span>📽️ Projector</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" name="equipment" value="AV Dongle (iPhone/Android)" />
+                <span>🔌 AV Dongle (iPhone/Android)</span>
+              </label>
+              <label class="chip">
+                <input type="checkbox" name="equipment" value="Laptop" />
+                <span>💻 Laptop</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Tables & Chairs -->
+          <div class="field">
+            <span class="label">Tables &amp; Chairs Needed <span class="req">*</span></span>
+            <div class="radio-group" role="radiogroup" aria-label="Tables and Chairs Needed">
+              <label class="radio-card">
+                <input type="radio" name="furniture" value="None" checked />
+                <span>None</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="furniture" value="Tables Only" />
+                <span>Tables Only</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="furniture" value="Chairs Only" />
+                <span>Chairs Only</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="furniture" value="Both Tables & Chairs" />
+                <span>Both Tables &amp; Chairs</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Additional Notes -->
+          <div class="field">
+            <label for="notes">Additional Notes / Details <span class="optional">(optional)</span></label>
+            <textarea id="notes" name="notes" rows="4" maxlength="1000"
+              placeholder="Number of tables/chairs, setup layout, special requests…"></textarea>
+            <small class="char-count"><span id="notesCount">0</span>/1000</small>
+          </div>
+        </fieldset>
+
+        <!-- ========== STATUS + SUBMIT ========== -->
+        <div id="formStatus" class="form-status" role="status" aria-live="polite" hidden></div>
+
+        <button type="submit" id="submitBtn" class="btn-submit">
+          <span class="btn-label">Submit Booking Request</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> All Saints High School &middot; Questions? Contact
+      <a href="mailto:scott.jamieson@ocsb.ca">scott.jamieson@ocsb.ca</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
