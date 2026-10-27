@@ -49,15 +49,78 @@ body {
   line-height: 1.5;
 }
 
+/* ---------- Stage light rig (bulbs added by script.js) ---------- */
+.light-rig {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 22px;
+  padding: 0 .5rem;
+  background: linear-gradient(#02060E, #0A192F);
+  border-bottom: 2px solid #1F2A3D;
+}
+
+.bulb {
+  --c: var(--gold-500);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: .25;
+  animation: chase 1.8s infinite;
+  animation-delay: calc(var(--i) * 90ms);
+}
+
+/* Each bulb flashes in turn, creating a "chasing" marquee effect */
+@keyframes chase {
+  0%, 35%, 100% { opacity: .25; box-shadow: none; }
+  10%           { opacity: 1;   box-shadow: 0 0 6px 2px var(--c), 0 0 18px 4px var(--c); }
+}
+
 /* ---------- Header ---------- */
 .site-header {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.25rem clamp(1rem, 4vw, 2.5rem);
-  background: linear-gradient(120deg, var(--navy-900), var(--navy-700));
+  padding: 2rem clamp(1rem, 4vw, 2.5rem);
   color: #fff;
   border-bottom: 4px solid var(--gold-500);
+  /* Faint "tech" grid over the navy gradient */
+  background:
+    linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(120deg, var(--navy-900), var(--navy-700));
+}
+
+/* Keep header content above the spotlight beams */
+.site-header > :not(.beam) { position: relative; z-index: 1; }
+
+/* Spotlight beams that sweep back and forth across the header */
+.beam {
+  position: absolute;
+  top: -10px;
+  width: 260px;
+  height: 320px;
+  z-index: 0;
+  pointer-events: none;
+  transform-origin: 50% 0;
+  background: linear-gradient(to bottom, rgba(255, 236, 179, .55), rgba(245, 158, 11, .12) 60%, transparent);
+  clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%);
+  filter: blur(3px);
+  mix-blend-mode: screen;
+  animation: sweep 7s ease-in-out infinite alternate;
+}
+
+.beam-left  { left: 18%; }
+.beam-right { left: 62%; animation-duration: 8.5s; animation-direction: alternate-reverse;
+              background: linear-gradient(to bottom, rgba(191, 219, 254, .5), rgba(30, 58, 138, .15) 60%, transparent); }
+
+@keyframes sweep {
+  from { transform: rotate(-40deg); }
+  to   { transform: rotate(40deg); }
 }
 
 .crest {
@@ -73,6 +136,13 @@ body {
   border: 3px solid var(--gold-500);
   color: var(--gold-500);
   letter-spacing: .5px;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+/* Glowing ring around the crest */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, .55); }
+  50%      { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0), 0 0 22px rgba(245, 158, 11, .45); }
 }
 
 .site-title {
@@ -101,8 +171,24 @@ body {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: hidden;
+  position: relative;
   animation: rise 500ms var(--ease) both;
 }
+
+/* A streak of light that scans along the card's top edge */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 6px;
+  z-index: 2;
+  background: linear-gradient(90deg, transparent, var(--gold-500), #FFF7E0, var(--gold-500), transparent);
+  animation: scan 3.5s linear infinite;
+}
+
+@keyframes scan { to { left: 100%; } }
 
 .card-header {
   padding: 1.75rem clamp(1.25rem, 4vw, 2.25rem) 1.25rem;
@@ -383,6 +469,9 @@ select {
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+  .bulb { opacity: .8; }
+  .beam-left  { transform: rotate(-20deg); }
+  .beam-right { transform: rotate(20deg); }
 }
 
 /* ---------- Responsive ---------- */

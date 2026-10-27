@@ -8,11 +8,11 @@
 const CONFIG = {
   // 👉 PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE
   //    (Deploy > Manage deployments > copy the URL ending in /exec)
-  SCRIPT_URL: "https://script.google.com/macros/s/AKfycbymoybz314bfkpLcBqkvwzeKKKkK4Yrp-NKaMTSOI9aGeAhGw04pBOeLP_uxDOB_9UiNw/exec",
+  SCRIPT_URL: "PASTE_YOUR_WEB_APP_URL_HERE",
 
   // Messages shown to the user
   MESSAGES: {
-    success: "✅ Your booking request was submitted! A confirmation email is on its way and the TEK crew will confirm with you personally.",
+    success: "✅ Your booking request was submitted! A confirmation email is on its way.",
     error: "⚠️ Something went wrong submitting your request. Please try again or email scott.jamieson@ocsb.ca.",
     notConfigured: "⚠️ The booking form isn't connected yet (missing Web App URL in script.js).",
     fixErrors: "Please fix the highlighted fields above.",
@@ -20,6 +20,12 @@ const CONFIG = {
 
   // Request timeout in milliseconds
   TIMEOUT_MS: 20000,
+
+  // Stage lights across the top of the page
+  LIGHTS: {
+    count: 24,                                              // number of bulbs
+    colors: ["#F59E0B", "#EF4444", "#3B82F6", "#FFFFFF"],   // cycled in order
+  },
 };
 
 /* ---------------------------------------------------------
@@ -117,6 +123,19 @@ function collectData(form) {
   };
 }
 
+/** Builds the row of flashing stage-light bulbs */
+function buildLightRig() {
+  const rig = el("lightRig");
+  const { count, colors } = CONFIG.LIGHTS;
+  for (let i = 0; i < count; i++) {
+    const bulb = document.createElement("span");
+    bulb.className = "bulb";
+    bulb.style.setProperty("--i", i);
+    bulb.style.setProperty("--c", colors[i % colors.length]);
+    rig.appendChild(bulb);
+  }
+}
+
 /** Status banner above the submit button */
 function showStatus(type, message) {
   const box = el("formStatus");
@@ -169,6 +188,8 @@ async function sendBooking(data) {
    --------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   const form = el("bookingForm");
+
+  buildLightRig();
 
   // Footer year + no past dates in the picker
   el("year").textContent = new Date().getFullYear();
