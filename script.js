@@ -12,7 +12,7 @@ const CONFIG = {
 
   // Messages shown to the user
   MESSAGES: {
-    success: "✅ Your booking request was submitted! A confirmation email is on its way.",
+    success: "✅ Your booking request was submitted! A confirmation email is on its way and the TEK crew will confirm with you personally.",
     error: "⚠️ Something went wrong submitting your request. Please try again or email scott.jamieson@ocsb.ca.",
     notConfigured: "⚠️ The booking form isn't connected yet (missing Web App URL in script.js).",
     fixErrors: "Please fix the highlighted fields above.",
