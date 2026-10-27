@@ -1,6 +1,6 @@
 # All Saints HS — Tech & Venue Booking
 
-| File | Where it goes |
+| File | ere it goes |
 |---|---|
 | `index.html`, `styles.css`, `script.js` | Your GitHub Pages repo (same folder) |
 | `Code.gs` | A Google Apps Script project (script.google.com) |
