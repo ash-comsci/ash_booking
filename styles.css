@@ -123,26 +123,45 @@ body {
   to   { transform: rotate(40deg); }
 }
 
-.crest {
+/* ---------- ASH ticket logo ---------- */
+.logo {
   flex: 0 0 auto;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-family: var(--font-head);
-  font-weight: 700;
-  background: var(--maroon-800);
-  border: 3px solid var(--gold-500);
-  color: var(--gold-500);
-  letter-spacing: .5px;
-  animation: pulse 2.4s ease-in-out infinite;
+  height: 64px;
+  width: auto;
+  overflow: visible;
+  transform: rotate(-4deg);
+  animation: glow 2.4s ease-in-out infinite;
+  transition: transform var(--t);
 }
 
-/* Glowing ring around the crest */
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, .55); }
-  50%      { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0), 0 0 22px rgba(245, 158, 11, .45); }
+.logo:hover { transform: rotate(0deg) scale(1.08); }
+
+/* Pulsing gold glow around the ticket */
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(245, 158, 11, .35)); }
+  50%      { filter: drop-shadow(0 0 12px rgba(245, 158, 11, .85)); }
+}
+
+/* Glint sweeping across the ticket */
+.logo-shine { animation: shine 4s ease-in-out infinite; }
+@keyframes shine {
+  0%        { transform: translateX(-40px); }
+  60%, 100% { transform: translateX(190px); }
+}
+
+/* Blinking "LIVE" light */
+.logo-live { animation: blink 1.2s steps(2, jump-none) infinite; }
+@keyframes blink { 50% { opacity: .15; } }
+
+/* Twinkling sparkles */
+.logo-spark {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: twinkle 1.8s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: .2; transform: scale(.5) rotate(0deg); }
+  50%      { opacity: 1;  transform: scale(1.15) rotate(45deg); }
 }
 
 .site-title {
@@ -476,6 +495,7 @@ select {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {
+  .logo { height: 50px; }
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
   .radio-group { display: grid; grid-template-columns: 1fr 1fr; }
   .radio-card span { width: 100%; justify-content: center; }

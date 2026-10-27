@@ -25,7 +25,67 @@
     <div class="beam beam-left" aria-hidden="true"></div>
     <div class="beam beam-right" aria-hidden="true"></div>
 
-    <div class="crest" aria-hidden="true">AS</div>
+    <!-- ASH logo: an event ticket with a stage mic and "LIVE" light -->
+    <svg class="logo" viewBox="0 0 140 64" role="img" aria-label="ASH Bookings logo">
+      <defs>
+        <linearGradient id="logoGold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#FDE68A" />
+          <stop offset=".55" stop-color="#F59E0B" />
+          <stop offset="1" stop-color="#D97706" />
+        </linearGradient>
+        <linearGradient id="logoMaroon" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#991B1B" />
+          <stop offset="1" stop-color="#5C0017" />
+        </linearGradient>
+        <linearGradient id="logoShineGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="0" />
+          <stop offset=".5" stop-color="#fff" stop-opacity=".45" />
+          <stop offset="1" stop-color="#fff" stop-opacity="0" />
+        </linearGradient>
+        <!-- Ticket outline with a notch cut into each side -->
+        <path id="logoTicket" d="M8,2 H132 A6,6 0 0 1 138,8 V25 A7,7 0 0 0 138,39 V56 A6,6 0 0 1 132,62
+                                 H8 A6,6 0 0 1 2,56 V39 A7,7 0 0 0 2,25 V8 A6,6 0 0 1 8,2 Z" />
+        <clipPath id="logoClip"><use href="#logoTicket" /></clipPath>
+      </defs>
+
+      <!-- Ticket body -->
+      <use href="#logoTicket" fill="url(#logoMaroon)" stroke="url(#logoGold)" stroke-width="2.5" />
+
+      <!-- Light glint that sweeps across the ticket -->
+      <g clip-path="url(#logoClip)">
+        <g transform="skewX(-20)">
+          <rect class="logo-shine" x="0" y="0" width="24" height="64" fill="url(#logoShineGrad)" />
+        </g>
+      </g>
+
+      <!-- Main wordmark -->
+      <text x="53" y="38" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700"
+            font-size="30" letter-spacing="2" fill="url(#logoGold)">ASH</text>
+      <text x="54" y="52" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600"
+            font-size="7.5" letter-spacing="2.5" fill="#FDE68A">BOOKINGS</text>
+
+      <!-- Perforated tear line -->
+      <line x1="104" y1="8" x2="104" y2="56" stroke="#F59E0B" stroke-width="1.5"
+            stroke-dasharray="3 3" opacity=".7" />
+
+      <!-- Stub: stage microphone -->
+      <rect x="116" y="13" width="10" height="17" rx="5" fill="url(#logoGold)" />
+      <line x1="116.5" y1="19" x2="125.5" y2="19" stroke="#5C0017" stroke-width="1.2" />
+      <line x1="116.5" y1="23" x2="125.5" y2="23" stroke="#5C0017" stroke-width="1.2" />
+      <path d="M112,24 a9,9 0 0 0 18,0" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" />
+      <line x1="121" y1="33" x2="121" y2="40" stroke="#F59E0B" stroke-width="2" />
+      <line x1="116" y1="41" x2="126" y2="41" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" />
+
+      <!-- Stub: blinking "LIVE" light -->
+      <circle class="logo-live" cx="112" cy="51.5" r="2.4" fill="#EF4444" />
+      <text x="116" y="54" font-family="Inter, sans-serif" font-weight="700" font-size="7"
+            letter-spacing=".5" fill="#FDE68A">LIVE</text>
+
+      <!-- Twinkling sparkles -->
+      <g transform="translate(13,13)"><path class="logo-spark" d="M0,-5 L1.2,-1.2 L5,0 L1.2,1.2 L0,5 L-1.2,1.2 L-5,0 L-1.2,-1.2Z" fill="#FDE68A" /></g>
+      <g transform="translate(94,48)"><path class="logo-spark" style="animation-delay:.6s" d="M0,-4 L1,-1 L4,0 L1,1 L0,4 L-1,1 L-4,0 L-1,-1Z" fill="#FDE68A" /></g>
+      <g transform="translate(132,11)"><path class="logo-spark" style="animation-delay:1.1s" d="M0,-4 L1,-1 L4,0 L1,1 L0,4 L-1,1 L-4,0 L-1,-1Z" fill="#fff" /></g>
+    </svg>
     <div>
       <h1 class="site-title">All Saints High School</h1>
       <p class="site-subtitle">Tech Equipment &amp; Venue Booking</p>
@@ -104,9 +164,7 @@
             <select id="location" name="location" required>
               <option value="" disabled selected>Select a location…</option>
               <option value="Wood Floor Gym">Wood Floor Gym</option>
-              <option value="Caf Gym + Stage">Caf Gym + Stage"</option>
               <option value="Caf Gym">Caf Gym</option>
-              <option value="Stage Only">Stage Only</option>
               <option value="Atrium">Atrium</option>
               <option value="LC">LC</option>
               <option value="Other">Other</option>
@@ -142,13 +200,9 @@
                 <input type="checkbox" name="equipment" value="Projector" />
                 <span>📽️ Projector</span>
               </label>
-                 <label class="chip">
-                <input type="checkbox" name="equipment" value="Lights" />
-                <span>Lights</span>
-              </label>
               <label class="chip">
                 <input type="checkbox" name="equipment" value="AV Dongle (iPhone/Android)" />
-                <span>🔌 AV Dongle For Music (iPhone/Android)</span>
+                <span>🔌 AV Dongle (iPhone/Android)</span>
               </label>
               <label class="chip">
                 <input type="checkbox" name="equipment" value="Laptop" />
