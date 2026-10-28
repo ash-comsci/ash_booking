@@ -8,7 +8,7 @@
 const CONFIG = {
   // 👉 PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE
   //    (Deploy > Manage deployments > copy the URL ending in /exec)
-  SCRIPT_URL: "PASTE_YOUR_WEB_APP_URL_HERE",
+  SCRIPT_URL: "https://script.google.com/macros/s/AKfycbw-4pG9aN-vvSTA2GFmFHadjyebt2r1IrBDSUWRkz836E7lmLxGPfxEWht_cDwc-L-o_g/exec",
 
   // Messages shown to the user
   MESSAGES: {
