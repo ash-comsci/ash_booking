@@ -13,7 +13,7 @@ const CONFIG = {
   // Messages shown to the user
   MESSAGES: {
     success: "✅ Your booking request was submitted! A confirmation email is on its way.",
-    error: "⚠️ Something went wrong submitting your request. Please try again or email scott.jamieson@ocsb.ca.",
+    error: "⚠️ Something went wrong submitting your request. Please try again or email shawna.mcsheffrey@ocsb.ca.",
     notConfigured: "⚠️ The booking form isn't connected yet (missing Web App URL in script.js).",
     fixErrors: "Please fix the highlighted fields above.",
   },
